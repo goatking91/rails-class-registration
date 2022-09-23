@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "boot"
 
 require "rails"
@@ -35,5 +37,48 @@ module RailsClassRegistration
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.autoload_paths += [Rails.root.join("app/services/concern"), Rails.root.join("app/errors")]
+    config.time_zone = "Asia/Seoul"
+    config.active_record.default_timezone = :local
+
+    config.hosts.clear
+
+    if ENV["RAILS_LOG_TO_STDOUT"].present?
+      logger           = ActiveSupport::Logger.new(STDOUT)
+      logger.formatter = config.log_formatter
+      config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    end
+
+    # TODO: 추후 시간 수정 필요
+    config.x.auth.access_token_ttl_in_seconds = 7.day.to_i
+    config.x.auth.refresh_token_ttl_in_seconds = 1.days.to_i
+
+    config.x.auth.secret_key = ENV.fetch("AUTH_SECRET_KEY", "")
+    config.x.auth.signing_algorithm = ENV.fetch("AUTH_SIGNING_ALGORITHM", "")
+
+    config.active_record.encryption.primary_key = ENV.fetch("PRIMARY_KEY", "")
+    config.active_record.encryption.deterministic_key = ENV.fetch("DETERMINISTIC_KEY", "")
+    config.active_record.encryption.key_derivation_salt = ENV.fetch("KEY_DERIVATION_SALT", "")
+
+    config.action_dispatch.show_exceptions = true
+    config.exceptions_app = self.routes
+
+    config.generators do |g|
+      g.test_framework :rspec,
+                       request_specs: false,
+                       view_specs: false,
+                       routing_specs: false,
+                       helper_specs: false,
+                       generator_specs: false,
+                       controller_specs: true
+    end
+
+    require Rails.root.join("lib/middlewares/handle_bad_request")
+    config.middleware.insert_after ActionDispatch::DebugExceptions, Middleware::HandleBadRequest
+
+    config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
+    config.i18n.available_locales = [:ko]
+    config.i18n.default_locale = :ko
   end
 end

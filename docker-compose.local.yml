@@ -1,0 +1,42 @@
+version: "3"
+
+volumes:
+  db-data:
+    external: false
+  redis-data:
+
+services:
+  db:
+    image: mysql:8.0.30
+    platform: linux/arm64
+    environment:
+      MYSQL_ROOT_PASSWORD: q12we34r
+      TZ: Asia/Seoul
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+  redis:
+    image: redis:6.2.7-alpine3.16
+    command: redis-server
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+
+  api:
+    depends_on:
+      - db
+      - redis
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env.development.local
+    environment:
+      TZ: 'Asia/Seoul'
+    ports:
+      - "3000:3000"
+      - "1234:1234"
+    working_dir: /app
+    command: sh -c "bundle install && bin/rails db:migrate && bundle exec rails server -b 0.0.0.0 -p 3000 -e development"
