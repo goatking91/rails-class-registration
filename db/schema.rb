@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_26_003436) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_26_011528) do
   create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "tutor_id"
     t.datetime "start_time"
@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_26_003436) do
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "uid"
     t.string "name"
     t.string "cellphone"
     t.datetime "created_at", null: false
