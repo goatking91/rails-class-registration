@@ -17,7 +17,11 @@ Rails.application.routes.draw do
     scope "/v1" do
       get "health/ping", to: "welcome#ping"
 
-      resources :users, controller: :users, param: :uid, only: [:create]
+      resources :users, controller: :users, param: :uid, only: [:create] do
+        member do
+          post :lessons
+        end
+      end
 
       resources :tutors, controller: :tutors, param: :uid, only: [:create] do
         member do
