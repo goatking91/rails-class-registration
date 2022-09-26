@@ -19,7 +19,8 @@ Rails.application.routes.draw do
 
       resources :users, controller: :users, param: :uid, only: [:create] do
         member do
-          post :lessons
+          post :lessons, action: :create_lessons
+          get :lessons, action: :index_lessons
         end
       end
 
