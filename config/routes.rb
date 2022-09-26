@@ -19,7 +19,11 @@ Rails.application.routes.draw do
 
       resources :users, controller: :users, param: :uid, only: [:create]
 
-      resources :tutors, controller: :tutors, param: :uid, only: [:create]
+      resources :tutors, controller: :tutors, param: :uid, only: [:create] do
+        member do
+          post :available_time, path: "available-time"
+        end
+      end
     end
   end
 end
