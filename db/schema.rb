@@ -12,13 +12,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_26_015205) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_26_063857) do
+  create_table "lessons", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "uid"
+    t.bigint "user_id"
+    t.integer "minute"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_lessons_on_user_id"
+  end
+
   create_table "schedules", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "tutor_id"
+    t.bigint "lesson_id"
     t.datetime "start_time"
     t.integer "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_schedules_on_lesson_id"
     t.index ["tutor_id"], name: "index_schedules_on_tutor_id"
   end
 
