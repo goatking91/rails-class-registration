@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       resources :tutors, controller: :tutors, param: :uid, only: [:create] do
         member do
           post :available_time, path: "available-time"
+          get :lessons, action: :lessons
         end
       end
     end
