@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         member do
           post :lessons, action: :create_lessons
           get :lessons, action: :index_lessons
+          get :tutors, action: :index_tutors
         end
       end
 
