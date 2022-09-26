@@ -35,3 +35,12 @@ ko:
     tutors/check_time_error:
       code: 40004
       message: 시작 시간과 종료 시간 설정이 잘못되었습니다.
+    lessons/is_not_mine_error:
+      code: 40005
+      message: 해당 수강은 본인 수강권이 아닙니다.
+    lessons/already_used_error:
+      code: 40006
+      message: 해당 수강권은 이미 사용되었습니다.
+    lessons/no_sign_up_error:
+      code: 40007
+      message: 수강신청을 할 수 없습니다. 시간을 확인해주세요.
