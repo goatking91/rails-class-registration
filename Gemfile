@@ -123,3 +123,9 @@ gem "case_transform", "~> 0.2"
 
 # A set of common locale data and translations to internationalize and/or localize your Rails applications.
 gem "rails-i18n", "~> 7.0", ">= 7.0.5"
+
+# Object oriented authorization for Rails applications
+gem "pundit", "~> 2.2"
+
+# ActiveModel Serializers addon for eliminating N+1 queries problem from the serializers.
+gem "ams_lazy_relationships", "~> 0.3.2"

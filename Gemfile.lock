@@ -74,7 +74,11 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    ams_lazy_relationships (0.3.2)
+      active_model_serializers (>= 0.10.0.rc4)
+      batch-loader
     ast (2.4.2)
+    batch-loader (2.0.1)
     bcrypt (3.1.18)
     bootsnap (1.13.0)
       msgpack (~> 1.2)
@@ -173,6 +177,8 @@ GEM
       pry (>= 0.10.4)
     puma (5.6.5)
       nio4r (~> 2.0)
+    pundit (2.2.0)
+      activesupport (>= 3.0.0)
     racc (1.6.0)
     rack (2.2.4)
     rack-cors (1.1.1)
@@ -288,6 +294,7 @@ PLATFORMS
 DEPENDENCIES
   active_interaction (~> 5.1, >= 5.1.1)
   active_model_serializers (~> 0.10.13)
+  ams_lazy_relationships (~> 0.3.2)
   bcrypt (~> 3.1.7)
   bootsnap
   case_transform (~> 0.2)
@@ -303,6 +310,7 @@ DEPENDENCIES
   mysql2 (~> 0.5)
   pry-rails (~> 0.3.9)
   puma (~> 5.0)
+  pundit (~> 2.2)
   rack-cors
   rails (~> 7.0.4)
   rails-i18n (~> 7.0, >= 7.0.5)
