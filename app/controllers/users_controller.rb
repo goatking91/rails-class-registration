@@ -24,7 +24,8 @@ class UsersController < ApplicationController
   end
 
   def sign_up
-    Lessons::SignUpService.run!(sign_up_params)
+    result = Lessons::SignUpService.run!(sign_up_params)
+    render api: result, status: :ok
   end
 
   private

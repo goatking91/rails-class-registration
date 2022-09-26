@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TutorsController < ApplicationController
-  before_action :set_tutor, only: [:available_time]
+  before_action :set_tutor, only: [:available_time, :lessons]
 
   def create
     result = Tutors::CreateService.run!(create_params)
@@ -13,6 +13,11 @@ class TutorsController < ApplicationController
     render api: result, status: :created
   end
 
+  def lessons
+    result = Lessons::GetScheduledService.run!(lessons_params)
+    render api: result, status: :ok
+  end
+
   private
     def create_params
       api_params.permit(:name, :cellphone)
@@ -20,6 +25,10 @@ class TutorsController < ApplicationController
 
     def available_time_params
       api_params.permit(available_times: [:date, :start_time, :end_time]).merge(tutor: @tutor)
+    end
+
+    def lessons_params
+      api_params.permit.merge(tutor: @tutor)
     end
 
     def set_tutor
