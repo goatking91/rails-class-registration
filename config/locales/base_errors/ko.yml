@@ -32,3 +32,6 @@ ko:
     tutors/is_exist_error:
       code: 40003
       message: 해당 튜터는 존재합니다.
+    tutors/check_time_error:
+      code: 40004
+      message: 시작 시간과 종료 시간 설정이 잘못되었습니다.

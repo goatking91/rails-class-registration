@@ -3,4 +3,8 @@
 require "active_support/concern"
 module ApplicationSpecSupport
   extend ActiveSupport::Concern
+
+  def create_tutor
+    create(:tutor, name: FFaker::NameKR.name, cellphone: FFaker::PhoneNumberKR.mobile_phone_number.strip)
+  end
 end
