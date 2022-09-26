@@ -29,3 +29,6 @@ ko:
     users/is_exist_error:
       code: 40002
       message: 해당 유저는 존재합니다.
+    tutors/is_exist_error:
+      code: 40003
+      message: 해당 튜터는 존재합니다.

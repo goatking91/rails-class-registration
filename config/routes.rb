@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       get "health/ping", to: "welcome#ping"
 
       resources :users, controller: :users, param: :uid, only: [:create]
+
+      resources :tutors, controller: :tutors, param: :uid, only: [:create]
     end
   end
 end
