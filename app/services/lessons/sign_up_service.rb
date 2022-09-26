@@ -10,6 +10,7 @@ class Lessons::SignUpService < ServiceBase
     my_lesson!
     already_used!
     sign_up!
+    lesson.reload
   end
 
   private
