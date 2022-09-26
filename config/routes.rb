@@ -22,6 +22,7 @@ Rails.application.routes.draw do
           post :lessons, action: :create_lessons
           get :lessons, action: :index_lessons
           get :tutors, action: :index_tutors
+          post :sign_up, path: "sign-up", action: :sign_up
         end
       end
 
