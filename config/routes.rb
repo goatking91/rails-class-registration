@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   scope "/api" do
     scope "/v1" do
       get "health/ping", to: "welcome#ping"
+
+      resources :users, controller: :users, param: :uid, only: [:create]
     end
   end
 end
