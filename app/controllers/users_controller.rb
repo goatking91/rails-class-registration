@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: [:create_lessons, :index_lessons]
+  before_action :set_user, only: [:create_lessons, :index_lessons, :index_tutors]
 
   def create
     result = Users::CreateService.run!(create_params)
@@ -18,6 +18,11 @@ class UsersController < ApplicationController
     render api: result, status: :ok
   end
 
+  def index_tutors
+    result = Tutors::IndexAvailableService.run!(index_tutors_params)
+    render api: result, status: :ok
+  end
+
   private
     def create_params
       api_params.permit(:name, :cellphone)
@@ -29,6 +34,10 @@ class UsersController < ApplicationController
 
     def index_lessons_params
       api_params.permit.merge(user: @user)
+    end
+
+    def index_tutors_params
+      api_params.permit(:start_time, :minute).merge(user: @user)
     end
 
     def set_user
